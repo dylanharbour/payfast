@@ -148,7 +148,12 @@ class Payfast implements PaymentProcessor
         }
         if($this->button)
         {
-            $htmlForm .= '<button type="submit">'.$this->getSubmitButton().'</button>';
+            if (config('payfast.button-view', false)) {
+                $htmlForm .= view(config('payfast.button-view'));
+            } else {
+                $htmlForm .= '<button type="submit">'.$this->getSubmitButton().'</button>';
+            }
+
         }
         return $htmlForm.'</form>';
     }
